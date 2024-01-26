@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.highlight {
+	cursor: pointer;
+	transition: background-color 1.5s;
+}
+	
+.highlight:hover {
+	background-color: #FFFF00;
+	cursor: pointer;
+}
+body {
+	background: linear-gradient(to bottom, #3494e6, #ffffff);
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100vh;
+  	width: 100vw;
+	color: #000000;
+	font-family: 'Arial', sans-serif;
+}
+
+.icona {
+  width: 30px;  
+  height: 30px;
+}
+
