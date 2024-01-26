@@ -94,6 +94,9 @@ const FormMeteo = () => {
                 <option value="" disabled hidden>
                   Seleziona un comune...
                 </option>
+                <option>
+                  Asti
+                </option>
                 {/* Mappa gli elementi dell'array per generare le opzioni del menu a tendina */}
                 {comuni.map((option, index) => (
                   <option key={index} value={option.nome}>
