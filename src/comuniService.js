@@ -1,6 +1,6 @@
 const express = require('express');
-const db = require('./db')
-const cors = require('cors')
+const db = require('./db');
+const cors = require('cors');
 
 const corsOptions = {
     origin: 'http://localhost:3000', // Sostituisci con l'origine del tuo client React
@@ -16,7 +16,7 @@ app.use(express.json())
 
 // Route to get all comuni
 app.get("/api/comuni", (req,res)=>{
-db.query("SELECT nome FROM comune", (err,result)=>{
+db.query("SELECT nome FROM lista", (err,result)=>{
     if(err) {
     console.log(err)
     } 
