@@ -19,6 +19,7 @@ const FormMeteo = () => {
       axios.get('https://primo-sito.vercel.app/api/comuni')
         .then(response => {
           setComuni(response.data);
+          console.log(response);
         })
         .catch(error => {
           console.error('Errore durante il recupero dei comuni:', error);
