@@ -17,10 +17,13 @@ app.use(express.json())
 // Route to get all comuni
 app.get("/api/comuni", (req,res)=>{
     db.query("SELECT nome FROM lista", (err,result)=>{
-        if(err) {
-            console.log(err)
-        } 
-        res.json(result)
+        if (err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+          } else {
+            console.log(result); // Aggiungi questo log per vedere cosa restituisce la query
+            res.json(result);
+          }
     });   
 });
 /*
