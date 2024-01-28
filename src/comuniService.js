@@ -16,12 +16,13 @@ app.use(express.json())
 
 // Route to get all comuni
 app.get("/api/comuni", (req,res)=>{
-db.query("SELECT nome FROM lista", (err,result)=>{
-    if(err) {
-    console.log(err)
-    } 
-res.send(result)
-});   });
+    db.query("SELECT nome FROM lista", (err,result)=>{
+        if(err) {
+            console.log(err)
+        } 
+        res.json(result)
+    });   
+});
 /*
 // Route to get one post
 app.get("/api/getFromId/:id", (req,res)=>{
