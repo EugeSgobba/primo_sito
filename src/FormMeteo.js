@@ -16,7 +16,7 @@ const FormMeteo = () => {
     // Stato per gestire la lista dei comuni
     const [comuni, setComuni] = useState([]);
     useEffect(() => {
-      axios.get('http://localhost:3001/api/comuni')
+      axios.get('https://primo-sito.vercel.app/api/comuni')
         .then(response => {
           setComuni(response.data);
         })
