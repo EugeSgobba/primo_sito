@@ -20,6 +20,7 @@ const FormMeteo = () => {
         .then(response => {
           setComuni(response.data);
           console.log(response);
+          console.log(response.data);
         })
         .catch(error => {
           console.error('Errore durante il recupero dei comuni:', error);
