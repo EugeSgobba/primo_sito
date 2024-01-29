@@ -1,18 +1,18 @@
 const express = require('express');
 const db = require('./db');
 const cors = require('cors');
-/*
+
 const corsOptions = {
-    origin: 'https://primo-sito.vercel.app', // Sostituisci con l'origine del tuo client React
+    origin: 'https://localhost:3000', // Sostituisci con l'origine del tuo client React
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,
   };
-*/
+  
 const app = express();
-app.use(cors());
-//const  PORT = process.env.PORT || 3001;
-//app.use(express.json())
+app.use(cors(corsOptions));
+const  PORT = process.env.PORT || 3001;
+app.use(express.json())
 
 // Route to get all comuni
 app.get("/api/comuni", (req,res)=>{
@@ -74,6 +74,6 @@ if(err) {
 console.log(err)
         } }) })
 */
-/*app.listen(PORT, ()=>{
+app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)
-})*/
+})
