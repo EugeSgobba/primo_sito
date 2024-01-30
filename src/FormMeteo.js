@@ -8,10 +8,9 @@ import TableMeteoGiorno3h from './TableMeteoGiorno3h';
 
 const FormMeteo = () => {
 
-    let comune=null;
-    let lat=null;
-    let lon=null;
-    let day=null;
+    const [lat, setLat] = useState(null);
+    const [lon, setLon] = useState(null);
+    const [comune, setComune] = useState(null);
 
     // Stato per gestire la lista dei comuni
     const [comuni, setComuni] = useState([]);
@@ -31,20 +30,21 @@ const FormMeteo = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const handleSelectChange = (event) => {
       setSelectedOption(event.target.value);
+      setComune(event.target.value);
     };
 
     const [weatherData, setWeatherData] = useState(null);
     const handleSubmit = async (e) => {
       e.preventDefault();  
       try {
-        comune=selectedOption;
         const posizione = await fetch(`https://www.meteoblue.com/en/server/search/query3?query=`+comune+`&apikey=zL0XDwpmGu4ygsvI`);
         const datiPosizione = await posizione.json();
-        lat=datiPosizione.results[0].lat;
-        lon=datiPosizione.results[0].lon;
-        const meteo = await fetch(`https://my.meteoblue.com/packages/basic-day?apikey=zL0XDwpmGu4ygsvI&lat=`+lat+`&lon=`+lon+`&asl=136&format=json`);
+        setLat(datiPosizione.results[0].lat);
+        setLon(datiPosizione.results[0].lon);
+        const meteo = await fetch(`https://my.meteoblue.com/packages/basic-day?apikey=zL0XDwpmGu4ygsvI&lat=`+datiPosizione.results[0].lat+`&lon=`+datiPosizione.results[0].lon+`&asl=136&format=json`);
         const datiMeteo = await meteo.json();
         setWeatherData(datiMeteo);
+        setSecondApiData(null);
       } catch (error) {
         console.error('Errore nella prima chiamata API:', error);
       }
@@ -54,16 +54,17 @@ const FormMeteo = () => {
     const handleCellClick = async (cell) => {
       try {
         //cell = data della previsione (stringa in formato yyyy-mm-dd), comune = il comune per cui vogliamo il meteo
+        console.log(lat+" "+lon+" "+comune);
         const meteo = await fetch(`https://my.meteoblue.com/packages/basic-3h?apikey=zL0XDwpmGu4ygsvI&lat=`+lat+`&lon=`+lon+`&asl=136&format=json`);
         const datiMeteo = await meteo.json();
         const meteo1h = await fetch(`https://my.meteoblue.com/packages/basic-1h?apikey=zL0XDwpmGu4ygsvI&lat=`+lat+`&lon=`+lon+`&asl=136&format=json`);
         const datiMeteo1h = await meteo1h.json();
         //a datiMeteo occorre aggiungere l'informazione sul giorno per cui è richiesto il meteo
-        day=cell.slice(8,10);
-        datiMeteo.day=day;
+        datiMeteo.day=cell.slice(8,10);
         datiMeteo.data_1h=datiMeteo1h.data_1h;
         // Aggiorna lo stato con i dati ottenuti
         setSecondApiData(datiMeteo);
+        console.log(lat+" "+lon+" "+comune);
       } catch (error) {
         console.error('Errore nella seconda chiamata API:', error);
         // Gestisci l'errore in modo appropriato qui
@@ -71,7 +72,7 @@ const FormMeteo = () => {
     };
 
     const [selectedApiType, setSelectedApiType] = useState('data_3h');
-    const [button3hDisabled, setButton3hDisabled] = useState(false);
+    const [button3hDisabled, setButton3hDisabled] = useState(true);
     const [button1hDisabled, setButton1hDisabled] = useState(false);
 
     const handleButton3hClick = () => {
