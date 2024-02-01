@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "primosito",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2024-01-31T15:18:59.081Z"
 }
